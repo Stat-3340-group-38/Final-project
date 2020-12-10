@@ -166,6 +166,14 @@ cardata$max_power <- log(cardata$max_power)
 #checking the data after getting logs
 summary(cardata)
 ```
+```{r}
+print(sd(cardata$selling_price))
+print(sd(cardata$km_driven))
+print(sd(cardata$mileage))
+print(sd(cardata$max_power))
+print(sd(cardata$seats))
+print(sd(cardata$car_age))
+```
 
 ```{r}
 # scale carData
