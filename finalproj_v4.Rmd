@@ -2,9 +2,7 @@
 title: "Math/Stats 3340 Group 38 Final Project Code"
 author: "Samson Mifflin, Dawei Yuan, Mackenzie Frolic-Smart"
 date: "12/9/2020"
-output:
-  html_document:
-    df_print: paged
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
