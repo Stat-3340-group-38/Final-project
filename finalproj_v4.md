@@ -190,9 +190,6 @@ boxplot(log(cardata$selling_price))
 ![](finalproj_v4_files/figure-gfm/unnamed-chunk-9-5.png)<!-- -->
 
 ``` r
-#boxplot(scale(cardata$selling_price, center= TRUE, scale=TRUE),main="scaled Selling Price boxplot")       
-#boxplot(scale(log(cardata$selling_price), center= TRUE, scale=TRUE),main="scaled Selling Price boxplot")              
-        
 boxplot(cardata$km_driven)
 ```
 
@@ -334,13 +331,6 @@ head(cormat)
     ## engine        -0.0174
     ## max_power     -0.2280
     ## seats          0.0082
-
-``` r
-#library(reshape2)
-#melted_cormat <- melt(cormat)
-#library(ggplot2)
-#ggplot(data=melted_cormat, aes(x=Var1,y=Var2,fill=value)) + geom+tile()
-```
 
 ``` r
 #remove rows where mileage is 0

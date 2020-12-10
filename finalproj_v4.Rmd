@@ -79,8 +79,6 @@ density=10
 boxplot(cardata$selling_price,main="Selling Price boxplot")
 hist (cardata$selling_price, breaks=30, col="violet", xlab="Selling Price", main="Selling Price histogram")
 boxplot(log(cardata$selling_price))       
-#boxplot(scale(cardata$selling_price, center= TRUE, scale=TRUE),main="scaled Selling Price boxplot")       
-#boxplot(scale(log(cardata$selling_price), center= TRUE, scale=TRUE),main="scaled Selling Price boxplot")              
         
 boxplot(cardata$km_driven)
 hist (cardata$km_driven, breaks=30, col="violet", xlab="Selling Price", main="km driven histogram")
@@ -152,10 +150,6 @@ boxplot(cardata$max_power, center= TRUE, scale=TRUE,main="max power boxplot")
 # make correlation matrix
 cormat <- round(cor(cardata[c(1,2,7,8,9,10,11)]),4)
 head(cormat)
-#library(reshape2)
-#melted_cormat <- melt(cormat)
-#library(ggplot2)
-#ggplot(data=melted_cormat, aes(x=Var1,y=Var2,fill=value)) + geom+tile()
 ```
 
 ```{r}
