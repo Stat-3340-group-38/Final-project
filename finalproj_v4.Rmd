@@ -232,31 +232,6 @@ text(x=1:length(cooksd)+1, y=cooksd, labels=ifelse(cooksd>4/nrow(train_data), na
 ```
 
 ```{r}
-influential <- as.numeric(names(cooksd)[(cooksd > 4 * mean(cooksd, na.rm = TRUE))]) 
-length(influential)
-```
-                                         
-```{r}
-# backward variable selection
-print('BACKWARD SELECTION')
-step.backward.model.scaledData<-stepAIC(fullModelscaledData,selection = "backward", trace = F)
-summary(step.backward.model.scaledData)
-```
-
-```{r}
-#forward variable selection
-print('FORWARD SELECTION')
-intercept.only.model.scaledData<-lm(selling_price~1,data = train_data)
-stepAIC(intercept.only.model.scaledData,direction = "forward")
-step.forward.model.scaledData<-stepAIC(intercept.only.model.scaledData,selection = "forward")
-summary(step.forward.model.scaledData)
-print('VIFs')
-print(vif(step.forward.model.scaledData))
-print('conditionNumber')
-print(kappa(step.forward.model.scaledData))
-```
-
-```{r}
 # compare the selected model and the model where we remove engine
 print('Comparing the selected model and the model with engine removed')
 noEngineModel <- lm(formula = selling_price ~ km_driven + fuel + seller_type + transmission + owner + mileage + max_power + seats + car_age, data = train_data)

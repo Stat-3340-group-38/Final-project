@@ -662,131 +662,6 @@ text(x=1:length(cooksd)+1, y=cooksd, labels=ifelse(cooksd>4/nrow(train_data), na
 ![](finalproj_v4_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
-influential <- as.numeric(names(cooksd)[(cooksd > 4 * mean(cooksd, na.rm = TRUE))]) 
-length(influential)
-```
-
-    ## [1] 185
-
-``` r
-# backward variable selection
-print('BACKWARD SELECTION')
-```
-
-    ## [1] "BACKWARD SELECTION"
-
-``` r
-step.backward.model.scaledData<-stepAIC(fullModelscaledData,selection = "backward", trace = F)
-summary(step.backward.model.scaledData)
-```
-
-    ## 
-    ## Call:
-    ## lm(formula = selling_price ~ km_driven + fuel + seller_type + 
-    ##     transmission + owner + mileage + engine + max_power + seats + 
-    ##     car_age, data = train_data)
-    ## 
-    ## Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -6.1221 -0.2252  0.0324  0.2376  2.0135 
-    ## 
-    ## Coefficients:
-    ##                              Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)                  0.501265   0.020241  24.765  < 2e-16 ***
-    ## km_driven                   -0.077669   0.006492 -11.964  < 2e-16 ***
-    ## fuelPetrol                  -0.163294   0.014350 -11.379  < 2e-16 ***
-    ## seller_typeIndividual       -0.137375   0.015252  -9.007  < 2e-16 ***
-    ## seller_typeTrustmark Dealer -0.090267   0.031007  -2.911  0.00361 ** 
-    ## transmissionManual          -0.323164   0.017679 -18.279  < 2e-16 ***
-    ## ownerFourth & Above Owner   -0.145141   0.035645  -4.072 4.72e-05 ***
-    ## ownerSecond Owner           -0.077729   0.012236  -6.352 2.27e-10 ***
-    ## ownerTest Drive Car          0.784113   0.167597   4.679 2.95e-06 ***
-    ## ownerThird Owner            -0.140397   0.021330  -6.582 5.01e-11 ***
-    ## mileage                      0.079659   0.008362   9.527  < 2e-16 ***
-    ## engine                       0.196488   0.010799  18.195  < 2e-16 ***
-    ## max_power                    0.395094   0.008060  49.020  < 2e-16 ***
-    ## seats                        0.028440   0.007132   3.987 6.75e-05 ***
-    ## car_age                     -0.456304   0.007408 -61.595  < 2e-16 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 0.3731 on 6228 degrees of freedom
-    ## Multiple R-squared:  0.8597, Adjusted R-squared:  0.8594 
-    ## F-statistic:  2727 on 14 and 6228 DF,  p-value: < 2.2e-16
-
-``` r
-#forward variable selection
-print('FORWARD SELECTION')
-```
-
-    ## [1] "FORWARD SELECTION"
-
-``` r
-intercept.only.model.scaledData<-lm(selling_price~1,data = train_data)
-stepAIC(intercept.only.model.scaledData,direction = "forward")
-```
-
-    ## Start:  AIC=-61.31
-    ## selling_price ~ 1
-
-    ## 
-    ## Call:
-    ## lm(formula = selling_price ~ 1, data = train_data)
-    ## 
-    ## Coefficients:
-    ## (Intercept)  
-    ##    -0.00497
-
-``` r
-step.forward.model.scaledData<-stepAIC(intercept.only.model.scaledData,selection = "forward")
-```
-
-    ## Start:  AIC=-61.31
-    ## selling_price ~ 1
-
-``` r
-summary(step.forward.model.scaledData)
-```
-
-    ## 
-    ## Call:
-    ## lm(formula = selling_price ~ 1, data = train_data)
-    ## 
-    ## Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -4.6356 -0.5972  0.0217  0.5346  3.7599 
-    ## 
-    ## Coefficients:
-    ##             Estimate Std. Error t value Pr(>|t|)
-    ## (Intercept) -0.00497    0.01259  -0.395    0.693
-    ## 
-    ## Residual standard error: 0.995 on 6242 degrees of freedom
-
-``` r
-print('VIFs')
-```
-
-    ## [1] "VIFs"
-
-``` r
-print(vif(step.forward.model.scaledData))
-```
-
-    ## named numeric(0)
-
-``` r
-print('conditionNumber')
-```
-
-    ## [1] "conditionNumber"
-
-``` r
-print(kappa(step.forward.model.scaledData))
-```
-
-    ## [1] 1
-
-``` r
 # compare the selected model and the model where we remove engine
 print('Comparing the selected model and the model with engine removed')
 ```
@@ -958,25 +833,25 @@ kappa(model.outlier8129removed)
 plot(model.outlier8129removed, which=1, col=c("blue")) # Residuals vs Fitted Plot
 ```
 
-![](finalproj_v4_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+![](finalproj_v4_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 ``` r
 plot(model.outlier8129removed, which=2, col=c("red"))  # Q-Q Plot
 ```
 
-![](finalproj_v4_files/figure-gfm/unnamed-chunk-23-2.png)<!-- -->
+![](finalproj_v4_files/figure-gfm/unnamed-chunk-20-2.png)<!-- -->
 
 ``` r
 plot(model.outlier8129removed, which=3, col=c("blue"))  # Scale-Location Plot
 ```
 
-![](finalproj_v4_files/figure-gfm/unnamed-chunk-23-3.png)<!-- -->
+![](finalproj_v4_files/figure-gfm/unnamed-chunk-20-3.png)<!-- -->
 
 ``` r
 plot(model.outlier8129removed, which=5, col=c("blue"))  # Residuals vs Leverage
 ```
 
-![](finalproj_v4_files/figure-gfm/unnamed-chunk-23-4.png)<!-- -->
+![](finalproj_v4_files/figure-gfm/unnamed-chunk-20-4.png)<!-- -->
 
 ``` r
 #stepwise bidirectional variable selection
@@ -1199,19 +1074,19 @@ selectmodelpreds<-predict(select.mod.outlier8129removed,test_data)
 plot(test_data$selling_price,Noenginepreds,abline(c(0,1)), xlab = "actual", ylab = "predicted")
 ```
 
-![](finalproj_v4_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+![](finalproj_v4_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 ``` r
 plot(test_data$selling_price,fullmodelpreds,abline(c(0,1)), xlab = "actual", ylab = "predicted")
 ```
 
-![](finalproj_v4_files/figure-gfm/unnamed-chunk-27-2.png)<!-- -->
+![](finalproj_v4_files/figure-gfm/unnamed-chunk-24-2.png)<!-- -->
 
 ``` r
 plot(test_data$selling_price,selectmodelpreds,abline(c(0,1)), xlab = "actual", ylab = "predicted")
 ```
 
-![](finalproj_v4_files/figure-gfm/unnamed-chunk-27-3.png)<!-- -->
+![](finalproj_v4_files/figure-gfm/unnamed-chunk-24-3.png)<!-- -->
 
 ``` r
 RMSE1<-sqrt(sum((Noenginepreds-test_data$selling_price)^2)/length(Noenginepreds))
